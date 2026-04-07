@@ -4,6 +4,9 @@ import { CardStrategy } from "./strategy/cardStrategy";
 import { UpiPayment } from "./strategy/upiPayment";
 import { CardPayment } from "./strategy/cardPayment";
 import store from "./observerPattern/store";
+import { ATMRoom } from "./atmDesign/atmRoom";
+import { Card } from "./atmDesign/card";
+import { TransactionType } from "./atmDesign/transactionTypes";
 
 function strategyPattern(name: string) {
     const payment = new UpiPayment();
@@ -17,5 +20,14 @@ function strategyPattern(name: string) {
     const iphoneObservable = store.init();
     iphoneObservable.setStockPrice(100);
   }
-  console.log(strategyPattern("hello")) 
-  console.log(observerPattern("hello")) 
+
+  function atmDesign() {
+    const atmRoom = new ATMRoom();  
+    atmRoom.atm.getState().insertCard(atmRoom.atm, atmRoom.user.getCard());
+    atmRoom.atm.getState().authenticatePin(atmRoom.atm, "111", atmRoom.user.getCard());
+    atmRoom.atm.getState().selectOperation(atmRoom.atm, TransactionType.WITHDRAW);
+    atmRoom.atm.getState().withdraw(atmRoom.atm, 1000, atmRoom.user.getCard(), atmRoom.user);
+  }
+strategyPattern("hello")
+observerPattern("hello")
+atmDesign()
