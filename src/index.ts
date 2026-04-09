@@ -17,6 +17,8 @@ import { Split, SplitType } from "./splitWiseDesign/expense";
 import { User } from "./splitWiseDesign/user/user";
 import { Director } from "./builderPattern/director";
 import { StudentBuilder } from "./builderPattern/studentBuilder";
+import { CheeseToping, TomatoToping } from "./decoratorPattern/topingDecorator";
+import { Margharita } from "./decoratorPattern/margharita";
 
 function strategyPattern(name: string) {
     const payment = new UpiPayment();
@@ -110,4 +112,11 @@ function builderPattern() {
   const student = director.buildStudent("John Doe", 20, "Male", "john.doe@example.com", "1234567890", "123 Main St", "Anytown", "CA", "12345");
   console.log(student);
 }
+function decoratorPattern() {
+  const margharita = new Margharita();
+  const cheeseToping = new CheeseToping(margharita);
+  const tomatoToping = new TomatoToping(cheeseToping);
+  console.log(tomatoToping.getCost());
+}
 builderPattern()
+decoratorPattern()

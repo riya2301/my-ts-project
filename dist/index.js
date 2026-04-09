@@ -18,6 +18,8 @@ const expense_1 = require("./splitWiseDesign/expense");
 const user_1 = require("./splitWiseDesign/user/user");
 const director_1 = require("./builderPattern/director");
 const studentBuilder_1 = require("./builderPattern/studentBuilder");
+const topingDecorator_1 = require("./decoratorPattern/topingDecorator");
+const margharita_1 = require("./decoratorPattern/margharita");
 function strategyPattern(name) {
     const payment = new upiPayment_1.UpiPayment();
     payment.pay(100);
@@ -96,4 +98,11 @@ function builderPattern() {
     const student = director.buildStudent("John Doe", 20, "Male", "john.doe@example.com", "1234567890", "123 Main St", "Anytown", "CA", "12345");
     console.log(student);
 }
+function decoratorPattern() {
+    const margharita = new margharita_1.Margharita();
+    const cheeseToping = new topingDecorator_1.CheeseToping(margharita);
+    const tomatoToping = new topingDecorator_1.TomatoToping(cheeseToping);
+    console.log(tomatoToping.getCost());
+}
 builderPattern();
+decoratorPattern();
